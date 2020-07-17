@@ -42,12 +42,21 @@ const Button = styled.button`
     }
 `;
 
+
 const Form = () => {
+    const [datos, handleDatos] = useState({
+        marca: '',
+        year: '',
+        plan: ''
+    });
+
+    const { marca, year, plan} = datos;
+
     return ( 
         <form>
             <Campo>
                 <Label>Marca</Label>
-                <Select>
+                <Select name="marca" value={marca} >
                     <option value="">-- Seleccione --</option>
                     <option value="americano">Americano</option>
                     <option value="europeo">Europeo</option>
@@ -56,7 +65,7 @@ const Form = () => {
             </Campo>
             <Campo>
                 <Label>Año</Label>
-                <Select>
+                <Select name="year" value={year}>
                     <option value="">-- Seleccione --</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -72,8 +81,8 @@ const Form = () => {
             </Campo>
             <Campo>
                 <Label>Plan</Label>
-                <InputRadio type="radio" name="plan" value="basico" />Básico
-                <InputRadio type="radio" name="plan" value="completo" />Completo
+                <InputRadio type="radio" name="plan" value="basico" checked={plan === "basico"} />Básico
+                <InputRadio type="radio" name="plan" value="completo" checked={plan === "completo"} />Completo
 
             </Campo>
             <Button type="button">Cotizar</Button>
