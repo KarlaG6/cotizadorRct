@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -47,7 +47,7 @@ const Form = () => {
     const [datos, handleDatos] = useState({
         marca: '',
         year: '',
-        plan: ''
+        plan: 'basico'
     });
 
     const { marca, year, plan} = datos;
