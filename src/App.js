@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import styled from '@emotion/styled';
 import Form from './components/Form';
+import Resumen from './components/Resumen';
+import Result from './components/Result';
 
 const Container = styled.div`
     max-width: 600px;
@@ -15,12 +17,25 @@ const FormContainer = styled.div`
 `;
 
 function App() {
+
+    const [resumen, setResumen] = useState({
+        cotizacion: 0,
+        datos: {
+            marca: '',
+            plan: '',
+            year: ''
+        }
+    });
+
+    const { cotizacion, datos} = resumen;
     return (
         <Container>
             <Header titulo="Mi cotizador" />
 
             <FormContainer>
-                <Form   />
+                <Form  setResumen={setResumen} />
+                <Resumen datos={datos} /> 
+                <Result cotizacion={cotizacion} />
             </FormContainer>
         </Container >
     );
