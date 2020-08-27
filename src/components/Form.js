@@ -52,7 +52,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Form = ({ setResumen }) => {
+const Form = ({ setResumen, setLoading }) => {
     const [datos, handleDatos] = useState({
         marca: '',
         year: '',
@@ -87,14 +87,19 @@ const Form = ({ setResumen }) => {
         rslt = calcMarca(marca)*rslt;
 
         const planIncrement = getPlan(plan);
-
         rslt = parseFloat( planIncrement * rslt ).toFixed(2);
-        console.log(rslt);
+        
+        setLoading(true);
 
-        setResumen({
-            cotizacion: rslt,
-            datos
-        })
+        setTimeout(() => {
+            setLoading(false);
+            //pasa la info al main component
+            setResumen({
+                cotizacion: rslt, 
+                datos
+            });
+        }, 3000);
+
     }
 
     return ( 

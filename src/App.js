@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Form from './components/Form';
 import Resumen from './components/Resumen';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 const Container = styled.div`
     max-width: 600px;
@@ -27,15 +28,18 @@ function App() {
         }
     });
 
+    const [ loading, setLoading] = useState(false);
+
     const { cotizacion, datos} = resumen;
     return (
         <Container>
             <Header titulo="Mi cotizador" />
 
             <FormContainer>
-                <Form  setResumen={setResumen} />
+                <Form  setResumen={setResumen} setLoading={setLoading} />
+                { loading ? <Spinner /> : null }
                 <Resumen datos={datos} /> 
-                <Result cotizacion={cotizacion} />
+                { !loading ? <Result cotizacion={cotizacion} /> : null }
             </FormContainer>
         </Container >
     );
