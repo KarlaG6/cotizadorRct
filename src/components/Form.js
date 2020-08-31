@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { getDifYear, calcMarca, getPlan } from '../Helper';
 
 const Campo = styled.div`
@@ -85,7 +86,6 @@ const Form = ({ setResumen, setLoading }) => {
         rslt -= (( difference * 3) * rslt)/100;
 
         rslt = calcMarca(marca)*rslt;
-
         const planIncrement = getPlan(plan);
         rslt = parseFloat( planIncrement * rslt ).toFixed(2);
         
@@ -95,7 +95,7 @@ const Form = ({ setResumen, setLoading }) => {
             setLoading(false);
             //pasa la info al main component
             setResumen({
-                cotizacion: rslt, 
+                cotizacion: Number(rslt), 
                 datos
             });
         }, 3000);
@@ -142,5 +142,8 @@ const Form = ({ setResumen, setLoading }) => {
 
     );
 }
- 
+Form.propTypes = {
+    setResumen: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired
+}
 export default Form;
